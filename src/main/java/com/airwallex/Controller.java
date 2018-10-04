@@ -30,14 +30,19 @@ public class Controller {
      * Handles Input in a Line by Line manner
      */
     public void serviceInputs(Scanner inLine) {
+        Scanner in = null;
         try {
             while (inLine.hasNextLine()) {
-                Scanner in = new Scanner(inLine.nextLine());
+                in = new Scanner(inLine.nextLine());
                 serviceCurrentInputLine(in);
             }
-            inLine.close();
         } catch (InValidDataException e) {
             handleException(e);
+        } finally {
+            if (in != null) {
+                in.close();
+            }
+            inLine.close();
         }
 
     }
